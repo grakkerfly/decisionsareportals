@@ -1,0 +1,22 @@
+/* Procedural tunnel: no remote textures or libraries. */
+(()=>{const canvas=document.querySelector('#cosmos'),gl=canvas.getContext('webgl',{alpha:false,antialias:false});window.portalMotion=!matchMedia('(prefers-reduced-motion: reduce)').matches;if(!gl)return;const vertex='attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';const fragment=`precision mediump float;
+uniform vec2 resolution;uniform float time;uniform vec2 drift;uniform float entrance;uniform float activation;
+float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1.,0.)),f.x),mix(hash(i+vec2(0.,1.)),hash(i+1.),f.x),f.y);}
+float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*noise(p);p=p*2.03+4.3;a*=.5;}return v;}
+void main(){vec2 uv=(gl_FragCoord.xy-.5*resolution)/resolution.y;uv+=drift;float r=length(uv);float a=atan(uv.y,uv.x);float tunnel=1./(r+.19);/* Circular coordinates keep the noise continuous across atan's -PI / PI seam. */ float spiral=a+tunnel*.39-time*.014;vec2 field=vec2(cos(spiral),sin(spiral))*(3.2+tunnel*.38)+vec2(tunnel*.24-time*.045,tunnel*.31-time*.035);float n=fbm(field*2.3);float clouds=fbm(vec2(cos(a),sin(a))*3.+tunnel*.75+vec2(time*.025,-time*.018));float veins=pow(max(0.,sin(tunnel*4.5+a*2.+n*6.-time*.24)),12.);vec3 low=vec3(.035,.035,.095);vec3 high=mix(vec3(.29,.17,.40),vec3(.12,.36,.43),clouds);vec3 col=mix(low,high,smoothstep(.2,.85,n))*(.55+clouds);col+=veins*vec3(.22,.18,.34)*(.25+n)*smoothstep(.08,.3,r);col+=pow(clouds,5.)*vec3(.55,.46,.55);col*=smoothstep(.0,.23,r)*(.8+.2*sin(a+time*.03));vec2 starUV=uv*155.;vec2 cell=floor(starUV);float star=step(.992,hash(cell))*pow(max(0.,1.-length(fract(starUV)-.5)*2.),9.);col+=star*vec3(.65,.73,.9);col*=1.-.4*smoothstep(.2,1.1,r);if(entrance>.5){
+ vec2 portalUV=uv/vec2(.31,.43);float portalRadius=length(portalUV);float angle=atan(portalUV.y,portalUV.x);
+ vec2 orbit=vec2(cos(angle-time*.11),sin(angle-time*.11));
+ float curl=fbm(orbit*4.2+vec2(time*.10,-time*.08));
+ float edge=.84+(curl-.5)*.12;float dist=abs(portalRadius-edge);
+ float halo=exp(-dist*8.);float rim=exp(-dist*42.);
+ float threads=.5+.5*sin(angle*9.+curl*14.-time*.65);
+ vec3 tint=mix(vec3(.36,.24,.85),vec3(.57,.82,1.),curl);
+ col*=mix(.12,1.,smoothstep(edge-.18,edge+.10,portalRadius));
+ col+=tint*(halo*.30+rim*(.28+threads*.30))*(1.+activation*.55);
+ col+=vec3(.76,.53,1.)*exp(-dist*17.)*pow(threads,4.)*.24;
+}
+gl_FragColor=vec4(col,1.);}`;
+function shader(type,source){const s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)){console.warn(gl.getShaderInfoLog(s));return null}return s}const vs=shader(gl.VERTEX_SHADER,vertex),fs=shader(gl.FRAGMENT_SHADER,fragment);if(!vs||!fs)return;const program=gl.createProgram();gl.attachShader(program,vs);gl.attachShader(program,fs);gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))return;gl.useProgram(program);const buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);const p=gl.getAttribLocation(program,'p');gl.enableVertexAttribArray(p);gl.vertexAttribPointer(p,2,gl.FLOAT,false,0,0);const res=gl.getUniformLocation(program,'resolution'),tm=gl.getUniformLocation(program,'time'),df=gl.getUniformLocation(program,'drift'),en=gl.getUniformLocation(program,'entrance'),ac=gl.getUniformLocation(program,'activation');gl.uniform1f(en,document.body.classList.contains('entrance')?1:0);function resize(){const scale=Math.min(devicePixelRatio,1.25);canvas.width=Math.round(innerWidth*scale);canvas.height=Math.round(innerHeight*scale);gl.viewport(0,0,canvas.width,canvas.height)}addEventListener('resize',resize);resize();let elapsed=0,last=0,activation=0;function draw(now){if(window.portalSceneStop)return;const dt=Math.min((now-last)/1000,.05);last=now;if(window.portalMotion&&!document.hidden)elapsed+=dt;if(!document.hidden){gl.uniform2f(res,canvas.width,canvas.height);gl.uniform1f(tm,elapsed);activation+=((window.portalHover||window.portalEntering?1:0)-activation)*Math.min(1,dt*5);gl.uniform1f(ac,activation);const cam=window.portalCamera;gl.uniform2f(df,cam?cam.yaw*.12:0,cam?-cam.pitch*.12:0);gl.drawArrays(gl.TRIANGLES,0,6)}requestAnimationFrame(draw)}requestAnimationFrame(draw)})();
+
+

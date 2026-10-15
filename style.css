@@ -1,0 +1,39 @@
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{background:#05030c;color:#f8f3ef;font-family:Arial,Helvetica,sans-serif}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:5px}button:focus-visible,a:focus-visible{outline:1px solid #e7bdfc;outline-offset:7px}#cosmos{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;background:radial-gradient(ellipse,#39214d,#101122 45%,#020207 90%)}.entry{height:100%;display:grid;place-items:center}.portal-link{position:relative;display:grid;place-items:center;padding:35px 20px;perspective:800px}.portal-link h1,.center-message h1{font-size:clamp(20.52px,2.8215vw,42.75px);font-weight:400;letter-spacing:-1.5px;white-space:nowrap;line-height:1.2;margin:0;text-shadow:0 0 12px #d7bcff70,0 0 32px #a590ea40;transform:translateZ(0);transition:transform .65s cubic-bezier(.2,.7,.2,1),text-shadow .65s,color .65s}.portal-link:hover h1,.portal-link:focus-visible h1,.center-message h1:hover{transform:translateZ(55px);color:#fff;text-shadow:0 0 9px #fff9,0 0 24px #dbb7ffd0,0 0 60px #b488ff9c}.transition{position:fixed;inset:0;z-index:99;background:#eee3ff;opacity:0;pointer-events:none;transition:opacity .8s .2s}.entering .portal-link{transition:transform 1s,filter 1s;transform:scale(3);filter:blur(10px)}.entering .transition{opacity:1}header,footer{position:fixed;left:3.2vw;right:3.2vw;z-index:20000;display:flex;align-items:center;justify-content:space-between;pointer-events:none}header{top:30px}header a,header button,footer button{pointer-events:auto}.wordmark{font-size:12px;letter-spacing:-.2px}.top-actions{display:flex;gap:22px}.top-actions button,footer{font-size:9px;letter-spacing:1px;color:#cdbed7}footer{bottom:24px}.desktop-help{font-size:9px;letter-spacing:.3px;opacity:.8}kbd{font:inherit;border:1px solid #ffffff25;border-radius:3px;padding:4px 6px}#universe{position:absolute;inset:0;overflow:hidden;touch-action:none;cursor:grab;user-select:none}#universe.dragging,#universe.dragging .fragment{cursor:grabbing}#media-space{position:absolute;inset:0;pointer-events:none}.fragment,.center-message{position:absolute;top:0;left:0;transform-origin:0 0;will-change:transform,filter}.fragment{padding:0;border:0;background:transparent;pointer-events:auto;opacity:1;cursor:pointer}.fragment img,.fragment video{display:block;width:100%;height:auto;max-height:620px;object-fit:contain;pointer-events:none;box-shadow:0 0 24px #b993eb14;transition:box-shadow .25s}.fragment:hover img,.fragment:hover video,.fragment:focus-visible img,.fragment:focus-visible video{box-shadow:0 0 35px #d7afff60}.video-mark{position:absolute;right:12px;bottom:12px;font-size:18px;text-shadow:0 1px 8px #000;pointer-events:none}.center-message{width:max-content;pointer-events:auto;text-align:center;perspective:800px}.touch-controls{display:none}#help-toggle{font-size:10px;color:#b5a9bd}#help{position:fixed;bottom:80px;right:3vw;padding:25px;background:#120d20ed;border:1px solid #ffffff20;z-index:21000;max-width:320px}#help h2{font-size:17px;font-weight:400}#help p{font-size:12px;line-height:2;color:#cdbed7}dialog{border:1px solid #ffffff18;background:#09060ff5;color:#fff;padding:48px 30px 20px;max-width:94vw;max-height:94dvh;overflow:auto;border-radius:4px}dialog::backdrop{background:#030108d9;backdrop-filter:blur(16px)}#close-viewer{position:absolute;right:18px;top:12px;font-size:11px;letter-spacing:1px}#viewer-content img,#viewer-content video{display:block;max-width:min(1000px,85vw);max-height:72dvh;object-fit:contain;margin:auto;filter:none;opacity:1}.viewer-nav{display:flex;justify-content:space-between;align-items:center;gap:30px;margin-top:18px;font-size:10px;letter-spacing:1px}.viewer-nav button{font-size:12px;color:#eee0fa;padding:10px 15px}.viewer-nav button:hover{text-shadow:0 0 12px #ddbeff}@media(max-width:700px){header{top:23px;left:22px;right:22px}.wordmark{font-size:10px}.portal-link h1,.center-message h1{letter-spacing:-.8px}.top-actions{gap:8px}.top-actions button{font-size:8px}footer{left:22px;right:22px;bottom:23px;justify-content:flex-end}.desktop-help{display:none}.touch-controls{position:fixed;bottom:80px;left:22px;z-index:20001;display:grid;grid-template-columns:repeat(3,36px);gap:4px}.touch-controls button{height:33px;background:#0a071780;border:1px solid #ffffff24;border-radius:4px;touch-action:none;color:#ddd0ed}dialog{padding:43px 12px 16px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+
+/* Hover overrides the per-frame distance blur without changing world positions. */
+.fragment:hover,.fragment:focus-visible{filter:blur(0px) brightness(1.08)!important}
+.center-message:hover{filter:blur(0px)!important}
+.inside header a:hover,.inside header button:hover,.inside footer button:hover{color:#fff;text-shadow:0 0 12px #d7bcffb0}
+/* Tiny, fast position flick; translate stays independent of the 3D transform. */
+@keyframes hover-position-flick{
+ 0%,100%{translate:0 0}
+ 12%{translate:.8px -.5px}
+ 25%{translate:-.7px .6px}
+ 38%{translate:.5px .8px}
+ 50%{translate:-.9px -.4px}
+ 63%{translate:.7px .2px}
+ 75%{translate:-.4px -.7px}
+ 88%{translate:.3px .5px}
+}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){
+ .fragment:hover,.center-message h1:hover,.portal-link:hover h1{
+ animation:hover-position-flick .32s linear infinite;
+ }
+}
+
+
+/* Enlarge the media itself, preserving the camera transform and tiny wiggle. */
+.fragment img,.fragment video{transition:transform .3s ease,box-shadow .25s;transform-origin:center}
+.fragment:hover img,.fragment:hover video,.fragment:focus-visible img,.fragment:focus-visible video{transform:scale(1.065)}
+.project-links{display:flex;justify-content:center;gap:22px;align-items:center;margin-top:17px;white-space:nowrap}
+.project-links a,.project-links button{font:400 10px Arial,Helvetica,sans-serif;letter-spacing:.7px;color:#cebddf;padding:4px 0;cursor:pointer}
+.project-links a:hover,.project-links button:hover{color:#fff;text-shadow:0 0 10px #d7bcff}
+.project-links [aria-disabled=true]{cursor:default}
+.music-player{display:flex;align-items:center;gap:16px;pointer-events:auto}
+.music-player button{font-size:10px;letter-spacing:.6px;padding:6px 0;color:#cdbed7}
+.music-player input{width:70px;height:3px;accent-color:#c6a6e2;cursor:pointer}
+#music-status{font-size:8px;color:#ac96b7}
+.portal-interior{position:fixed;inset:0;width:100%;height:100%;border:0;z-index:100000;background:#05030c}
+
+@media(max-width:700px){.project-links{gap:16px;margin-top:14px}.project-links a,.project-links button{font-size:9px}.music-player{gap:12px}.music-player input{width:58px}}
