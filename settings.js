@@ -4,7 +4,7 @@ window.SITE_CONFIG = {
   pumpfun: 'https://pump.fun/coin/', // paste the full Pump.fun coin URL
   contract: 'contract address', // paste the contract address to copy
   tracks: ['assets/music.mp3'], // add more MP3 paths for the next button
-  volume: 0.30
+  volume: 0.15
 };
 
 (()=>{
