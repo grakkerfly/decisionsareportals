@@ -1,8 +1,145 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#05030c"><meta name="description" content="decisions are portals"><title>decisions are portals</title><link rel="stylesheet" href="style.css?v=14"></head><body class="inside"><canvas id="cosmos" aria-hidden="true"></canvas><header><a class="wordmark" href="/" target="_top">decisions are portals</a><div class="top-actions"><button id="motion" aria-pressed="false">pause motion</button><button id="reset">reset view ↗</button></div></header><main id="universe" aria-label="Explore floating media in three dimensions"><div id="media-space"><div class="center-message"><h1>decisions are portals</h1><nav class="project-links" aria-label="Project links"><a id="twitter-link">twitter</a><a id="pumpfun-link">pumpfun</a><button id="copy-contract">copy contract</button></nav></div></div></main><footer class="explorer-footer"><p class="desktop-help"><kbd>W A S D</kbd> move · <kbd>Ctrl</kbd> down · <kbd>Space</kbd> up · drag to look · click to open</p><div class="music-player" aria-label="Music player"><span id="music-status" role="status"></span><button id="music-toggle" aria-label="Play music">play</button><button id="music-next" aria-label="Next track">next</button><input id="music-volume" type="range" min="0" max="1" step="0.01" value="0.30" aria-label="Music volume"></div></footer><aside id="help" hidden><h2>controls</h2><p>W / S — forward / backward<br>A / D — left / right<br>Ctrl — down<br>Space — up<br>Drag — look around<br>Scroll — forward / backward<br>Click media — open<br>Escape — close<br>Touch: drag to look; use arrows to move.</p></aside><nav class="touch-controls" aria-label="Movement"><button data-move="control" aria-label="Move down">−</button><button data-move="w" aria-label="Forward">↑</button><button data-move=" " aria-label="Move up">+</button><button data-move="a" aria-label="Left">←</button><button data-move="s" aria-label="Backward">↓</button><button data-move="d" aria-label="Right">→</button></nav><dialog id="viewer" aria-label="Media viewer"><button id="close-viewer" aria-label="Close media">close ×</button><div id="viewer-content"></div><div class="viewer-nav"><button id="previous" aria-label="Previous media">prev</button><span id="viewer-index"></span><button id="next" aria-label="Next media">next</button></div></dialog><script src="cosmos.js?v=13"></script><script src="explore.js?v=15"></script><script src="settings.js?v=4"></script></body></html>
-
-
-
-
-
-
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#05030c">
+    <meta name="description" content="decisions are portals">
+    <title>
+      decisions are portals
+    </title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="stylesheet" href="style.css?v=14">
+  </head>
+  <body class="inside">
+    <canvas id="cosmos" aria-hidden="true">
+    </canvas>
+    <header>
+      <a class="wordmark" href="/" target="_top">
+        decisions are portals
+      </a>
+      <div class="top-actions">
+        <button id="motion" aria-pressed="false">
+          pause motion
+        </button>
+        <button id="reset">
+          reset view ↗
+        </button>
+      </div>
+    </header>
+    <main id="universe" aria-label="Explore floating media in three dimensions">
+      <div id="media-space">
+        <div class="center-message">
+          <h1>
+            decisions are portals
+          </h1>
+          <nav class="project-links" aria-label="Project links">
+            <a id="twitter-link">
+              twitter
+            </a>
+            <a id="pumpfun-link">
+              pumpfun
+            </a>
+            <button id="copy-contract">
+              copy contract
+            </button>
+          </nav>
+        </div>
+      </div>
+    </main>
+    <footer class="explorer-footer">
+      <p class="desktop-help">
+        <kbd>
+          W A S D
+        </kbd>
+        move ·
+        <kbd>
+          Ctrl
+        </kbd>
+        down ·
+        <kbd>
+          Space
+        </kbd>
+        up · drag to look · click to open
+      </p>
+      <div class="music-player" aria-label="Music player">
+        <span id="music-status" role="status">
+        </span>
+        <button id="music-toggle" aria-label="Play music">
+          play
+        </button>
+        <button id="music-next" aria-label="Next track">
+          next
+        </button>
+        <input id="music-volume" type="range" min="0" max="1" step="0.01" value="0.30" aria-label="Music volume">
+      </div>
+    </footer>
+    <aside id="help" hidden>
+      <h2>
+        controls
+      </h2>
+      <p>
+        W / S — forward / backward
+        <br>
+        A / D — left / right
+        <br>
+        Ctrl — down
+        <br>
+        Space — up
+        <br>
+        Drag — look around
+        <br>
+        Scroll — forward / backward
+        <br>
+        Click media — open
+        <br>
+        Escape — close
+        <br>
+        Touch: drag to look; use arrows to move.
+      </p>
+    </aside>
+    <nav class="touch-controls" aria-label="Movement">
+      <button data-move="control" aria-label="Move down">
+        −
+      </button>
+      <button data-move="w" aria-label="Forward">
+        ↑
+      </button>
+      <button data-move=" " aria-label="Move up">
+        +
+      </button>
+      <button data-move="a" aria-label="Left">
+        ←
+      </button>
+      <button data-move="s" aria-label="Backward">
+        ↓
+      </button>
+      <button data-move="d" aria-label="Right">
+        →
+      </button>
+    </nav>
+    <dialog id="viewer" aria-label="Media viewer">
+      <button id="close-viewer" aria-label="Close media">
+        close ×
+      </button>
+      <div id="viewer-content">
+      </div>
+      <div class="viewer-nav">
+        <button id="previous" aria-label="Previous media">
+          prev
+        </button>
+        <span id="viewer-index">
+        </span>
+        <button id="next" aria-label="Next media">
+          next
+        </button>
+      </div>
+    </dialog>
+    <script src="cosmos.js?v=13">
+    </script>
+    <script src="explore.js?v=15">
+    </script>
+    <script src="settings.js?v=4">
+    </script>
+  </body>
+</html>
