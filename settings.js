@@ -1,8 +1,8 @@
 // EDIT THESE VALUES: project links, contract address and music playlist.
 window.SITE_CONFIG = {
   twitter: 'https://x.com/portaldecisions', // e.g. https://x.com/your_account
-  pumpfun: 'https://pump.fun/coin/', // paste the full Pump.fun coin URL
-  contract: 'contract address', // paste the contract address to copy
+  pumpfun: 'https://pump.fun/coin/5dPKW7oEEynFRSH39U11Yes7Rjk9ENPb9iEgiM3Vpump', // paste the full Pump.fun coin URL
+  contract: '5dPKW7oEEynFRSH39U11Yes7Rjk9ENPb9iEgiM3Vpump', // paste the contract address to copy
   tracks: ['assets/music.mp3'], // add more MP3 paths for the next button
   volume: 0.15
 };
